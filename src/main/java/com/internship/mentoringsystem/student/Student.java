@@ -1,44 +1,58 @@
 package com.internship.mentoringsystem.student;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Student {
-    private Long id;
-    private Integer cpf;
+    @Id
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue (
+            strategy = GenerationType.SEQUENCE,
+            generator = "student_sequence"
+    )
+    private Long studentId;
+    private String studentCpf;
     private String studentName;
-    private String studentAdress;
+    private String studentAddress;
     private String studentEmail;
 
     public Student() {
     }
 
-    public Student(Long id, Integer cpf, String studentName, String studentAdress, String studentEmail) {
-        this.id = id;
-        this.cpf = cpf;
+    public Student(Long studentId, String studentCpf, String studentName, String studentAddress, String studentEmail) {
+        this.studentId = studentId;
+        this.studentCpf = studentCpf;
         this.studentName = studentName;
-        this.studentAdress = studentAdress;
+        this.studentAddress = studentAddress;
         this.studentEmail = studentEmail;
     }
 
-    public Student(Integer cpf, String studentName, String studentAdress, String studentEmail) {
-        this.cpf = cpf;
+    public Student(String studentCpf, String studentName, String studentAddress, String studentEmail) {
+        this.studentCpf = studentCpf;
         this.studentName = studentName;
-        this.studentAdress = studentAdress;
+        this.studentAddress = studentAddress;
         this.studentEmail = studentEmail;
     }
 
-    public Long getId() {
-        return id;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
-    public Integer getCpf() {
-        return cpf;
+    public String getStudentCpf() {
+        return studentCpf;
     }
 
-    public void setCpf(Integer cpf) {
-        this.cpf = cpf;
+    public void setStudentCpf(String studentCpf) {
+        this.studentCpf = studentCpf;
     }
 
     public String getStudentName() {
@@ -49,29 +63,29 @@ public class Student {
         this.studentName = studentName;
     }
 
-    public String getStudentAdress() {
-        return studentAdress;
+    public String getStudentAddress() {
+        return studentAddress;
     }
 
-    public void setStudentAdress(String studentAdress) {
-        this.studentAdress = studentAdress;
+    public void setStudentAddress(String studentAddress) {
+        this.studentAddress = studentAddress;
     }
 
     public String getStudentEmail() {
         return studentEmail;
     }
 
-    public void setStudentEmail() {
+    public void setStudentEmail(String studentEmail) {
         this.studentEmail = studentEmail;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
-                ", cpf=" + cpf +
+                "studentId=" + studentId +
+                ", studentCpf=" + studentCpf +
                 ", studentName='" + studentName + '\'' +
-                ", studentAdress='" + studentAdress + '\'' +
+                ", studentAddress='" + studentAddress + '\'' +
                 ", studentEmail='" + studentEmail + '\'' +
                 '}';
     }

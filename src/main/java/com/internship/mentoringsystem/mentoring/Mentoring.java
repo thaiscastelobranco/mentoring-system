@@ -4,45 +4,68 @@ import com.internship.mentoringsystem.classes.Classes;
 import com.internship.mentoringsystem.mentor.Mentor;
 import com.internship.mentoringsystem.student.Student;
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table
 public class Mentoring {
-    private Long id;
+    @Id
+    @SequenceGenerator(
+            name = "mentoring_sequence",
+            sequenceName = "mentoring_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "mentoring_sequence"
+    )
+    private Long mentoringId;
     private String mentoringType;
-    private Classes classes;
+    @OneToMany
+    private Set<Classes> classes;
+    @OneToOne
     private Mentor mentor;
-    private Student student;
+    @OneToMany
+    private Set<Student> student;
 
-    public Mentoring(Long id, String mentoringType, Classes classes, Mentor mentor, Student student) {
-        this.id = id;
+    public Mentoring() {
+    }
+
+    public Mentoring(Long mentoringId, String mentoringType, Set<Classes> classes, Mentor mentor, Set<Student> student) {
+        this.mentoringId = mentoringId;
         this.mentoringType = mentoringType;
         this.classes = classes;
         this.mentor = mentor;
         this.student = student;
     }
 
-    public Mentoring (String mentoringType, Classes classes, Mentor mentor, Student student) {
+    public Mentoring (String mentoringType, Set<Classes> classes, Mentor mentor, Set<Student> student) {
         this.mentoringType = mentoringType;
         this.classes = classes;
         this.mentor = mentor;
         this.student = student;
     }
 
-    public Long getId() {
-        return id;
+    public Long getMentoringId() {
+        return mentoringId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long mentoringId) {
+        this.mentoringId = mentoringId;
     }
 
     public String getMentoringType() {
         return mentoringType;
     }
 
-    public Classes getClasses() {
+    public void setMentoringType(String mentoringType) { this.mentoringType = mentoringType; }
+
+    public Set<Classes> getClasses() {
         return classes;
     }
 
-    public void setClasses(Classes classes) {
+    public void setClasses(Set<Classes> classes) {
         this.classes = classes;
     }
 
@@ -54,18 +77,18 @@ public class Mentoring {
         this.mentor = mentor;
     }
 
-    public Student getStudent() {
+    public Set<Student> getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(Set<Student> student) {
         this.student = student;
     }
 
     @Override
     public String toString() {
         return "Mentoring{" +
-                "id=" + id +
+                "mentoringId=" + mentoringId +
                 ", mentoringType='" + mentoringType + '\'' +
                 ", classes=" + classes +
                 ", mentor=" + mentor +

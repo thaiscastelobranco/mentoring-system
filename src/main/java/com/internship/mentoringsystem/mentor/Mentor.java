@@ -1,27 +1,41 @@
 package com.internship.mentoringsystem.mentor;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Mentor {
+    @Id
+    @SequenceGenerator(
+            name = "mentor_sequence",
+            sequenceName = "mentor_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "mentor_sequence"
+    )
     private Long id;
-    private Integer cpf;
+    private String mentorCpf;
     private String mentorName;
-    private String mentorAdress;
+    private String mentorAddress;
     private String mentorEmail;
 
     public Mentor() {
     }
 
-    public Mentor(Long id, Integer cpf, String mentorName, String mentorAdress, String mentorEmail) {
+    public Mentor(Long id, String mentorCpf, String mentorName, String mentorAddress, String mentorEmail) {
         this.id = id;
-        this.cpf = cpf;
+        this.mentorCpf = mentorCpf;
         this.mentorName = mentorName;
-        this.mentorAdress = mentorAdress;
+        this.mentorAddress = mentorAddress;
         this.mentorEmail = mentorEmail;
     }
 
-    public Mentor(Integer cpf, String mentorName, String mentorAdress, String mentorEmail) {
-        this.cpf = cpf;
+    public Mentor(String mentorCpf, String mentorName, String mentorAddress, String mentorEmail) {
+        this.mentorCpf = mentorCpf;
         this.mentorName = mentorName;
-        this.mentorAdress = mentorAdress;
+        this.mentorAddress = mentorAddress;
         this.mentorEmail = mentorEmail;
     }
 
@@ -33,12 +47,12 @@ public class Mentor {
         this.id = id;
     }
 
-    public Integer getCpf() {
-        return cpf;
+    public String getMentorCpf() {
+        return mentorCpf;
     }
 
-    public void setCpf(Integer cpf) {
-        this.cpf = cpf;
+    public void setMentorCpf(String mentorCpf) {
+        this.mentorCpf = mentorCpf;
     }
 
     public String getMentorName() {
@@ -49,12 +63,12 @@ public class Mentor {
         this.mentorName = mentorName;
     }
 
-    public String getMentorAdress() {
-        return mentorAdress;
+    public String getMentorAddress() {
+        return mentorAddress;
     }
 
-    public void setMentorAdress(String mentorAdress) {
-        this.mentorAdress = mentorAdress;
+    public void setMentorAddress(String mentorAddress) {
+        this.mentorAddress = mentorAddress;
     }
 
     public String getMentorEmail() {
@@ -69,9 +83,9 @@ public class Mentor {
     public String toString() {
         return "Mentor{" +
                 "id=" + id +
-                ", cpf=" + cpf +
+                ", mentorCpf=" + mentorCpf +
                 ", mentorName='" + mentorName + '\'' +
-                ", mentorAdress='" + mentorAdress + '\'' +
+                ", mentorAddress='" + mentorAddress + '\'' +
                 ", mentorEmail='" + mentorEmail + '\'' +
                 '}';
     }

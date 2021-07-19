@@ -34,7 +34,7 @@ public class ClassesService {
     public void deleteClasses(Long classesId) {
         boolean exists = classesRepository.existsById(classesId);
         if(!exists) {
-            throw new IllegalStateException("This class with" + classesId + "does not exists");
+            throw new IllegalStateException("This class with" + classesId + "does not exists.");
         }
         classesRepository.deleteById(classesId);
     }
