@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "mentoring")
 public class Mentoring {
     @Id
     @SequenceGenerator(
@@ -25,6 +25,7 @@ public class Mentoring {
     @OneToMany
     private Set<Classes> classes;
     @OneToOne
+    @Embedded
     private Mentor mentor;
     @OneToMany
     private Set<Student> student;
@@ -61,6 +62,7 @@ public class Mentoring {
 
     public void setMentoringType(String mentoringType) { this.mentoringType = mentoringType; }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classes")
     public Set<Classes> getClasses() {
         return classes;
     }
@@ -69,6 +71,7 @@ public class Mentoring {
         this.classes = classes;
     }
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "mentor")
     public Mentor getMentor() {
         return mentor;
     }
@@ -77,6 +80,7 @@ public class Mentoring {
         this.mentor = mentor;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     public Set<Student> getStudent() {
         return student;
     }

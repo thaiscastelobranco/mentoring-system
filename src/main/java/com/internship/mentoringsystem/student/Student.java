@@ -3,7 +3,7 @@ package com.internship.mentoringsystem.student;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "student")
 public class Student {
     @Id
     @SequenceGenerator(

@@ -3,7 +3,7 @@ package com.internship.mentoringsystem.classes;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "classes")
 public class Classes {
     @Id
     @SequenceGenerator(
@@ -15,14 +15,14 @@ public class Classes {
             strategy = GenerationType.SEQUENCE,
             generator = "classes_sequence"
     )
-    private Long id;
+    private Long classesId;
     private String mentoringPeriod;
 
     public Classes(){
     }
 
-    public Classes(Long id, String mentoringPeriod) {
-        this.id = id;
+    public Classes(Long classesId, String mentoringPeriod) {
+        this.classesId = classesId;
         this.mentoringPeriod = mentoringPeriod;
     }
 
@@ -30,12 +30,12 @@ public class Classes {
         this.mentoringPeriod = mentoringPeriod;
     }
 
-    public Long getId() {
-        return id;
+    public Long getClassesId() {
+        return classesId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setClassesId(Long classesId) {
+        this.classesId = classesId;
     }
 
     public String getMentoringPeriod() {
@@ -49,7 +49,7 @@ public class Classes {
     @Override
     public String toString() {
         return "Classes{" +
-                "id=" + id +
+                "classesId=" + classesId +
                 ", mentoringPeriod='" + mentoringPeriod + '\'' +
                 '}';
     }
