@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "mentoring")
+@Table(name = "tb_mentoring")
 public class Mentoring {
     @Id
     @SequenceGenerator(
@@ -20,40 +20,39 @@ public class Mentoring {
             strategy = GenerationType.SEQUENCE,
             generator = "mentoring_sequence"
     )
-    private Long mentoringId;
+    @Column(name = "idt_mentoring")
+    private Long id;
+    @Column(name = "desc_mentoring_type")
     private String mentoringType;
-    @OneToMany
-    private Set<Classes> classes;
-    @OneToOne
-    @Embedded
+    @ManyToOne
+    @JoinColumn(name = "idt_classes", nullable = false)
+    private Classes classes;
+    @ManyToOne
+    @JoinColumn(name = "idt_mentor", nullable = false)
     private Mentor mentor;
-    @OneToMany
-    private Set<Student> student;
 
     public Mentoring() {
     }
 
-    public Mentoring(Long mentoringId, String mentoringType, Set<Classes> classes, Mentor mentor, Set<Student> student) {
-        this.mentoringId = mentoringId;
+    public Mentoring(Long id, String mentoringType, Classes classes, Mentor mentor) {
+        this.id = id;
         this.mentoringType = mentoringType;
         this.classes = classes;
         this.mentor = mentor;
-        this.student = student;
     }
 
-    public Mentoring (String mentoringType, Set<Classes> classes, Mentor mentor, Set<Student> student) {
+    public Mentoring (String mentoringType, Classes classes, Mentor mentor) {
         this.mentoringType = mentoringType;
         this.classes = classes;
         this.mentor = mentor;
-        this.student = student;
     }
 
-    public Long getMentoringId() {
-        return mentoringId;
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Long mentoringId) {
-        this.mentoringId = mentoringId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getMentoringType() {
@@ -62,16 +61,14 @@ public class Mentoring {
 
     public void setMentoringType(String mentoringType) { this.mentoringType = mentoringType; }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classes")
-    public Set<Classes> getClasses() {
+    public Classes getClasses() {
         return classes;
     }
 
-    public void setClasses(Set<Classes> classes) {
+    public void setClasses(Classes classes) {
         this.classes = classes;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "mentor")
     public Mentor getMentor() {
         return mentor;
     }
@@ -80,23 +77,13 @@ public class Mentoring {
         this.mentor = mentor;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    public Set<Student> getStudent() {
-        return student;
-    }
-
-    public void setStudent(Set<Student> student) {
-        this.student = student;
-    }
-
     @Override
     public String toString() {
         return "Mentoring{" +
-                "mentoringId=" + mentoringId +
+                "id=" + id +
                 ", mentoringType='" + mentoringType + '\'' +
                 ", classes=" + classes +
                 ", mentor=" + mentor +
-                ", student=" + student +
                 '}';
     }
 }

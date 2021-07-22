@@ -40,10 +40,10 @@ public class ClassesService {
     }
 
     @Transactional
-    public void updateClasses(Long classesId, String mentoringPeriod) {
-        Classes classes = classesRepository.findById(classesId)
+    public void updateClasses(Long id, String mentoringPeriod) {
+        Classes classes = classesRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Class with id" +
-                        classesId + "does not exists"));
+                        id + "does not exists"));
         if(mentoringPeriod != null &&
                 mentoringPeriod.length() > 0) {
             classes.setMentoringPeriod(mentoringPeriod);

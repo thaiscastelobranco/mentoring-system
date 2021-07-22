@@ -31,12 +31,12 @@ public class MentorService {
         mentorRepository.save(mentor);
     }
 
-    public void deleteMentor(Long mentorId) {
-        boolean exists = mentorRepository.existsById(mentorId);
+    public void deleteMentor(Long id) {
+        boolean exists = mentorRepository.existsById(id);
         if (!exists) {
-            throw new IllegalStateException("This mentor with " + mentorId + " already exists.");
+            throw new IllegalStateException("This mentor with " + id + " already exists.");
         }
-        mentorRepository.deleteById(mentorId);
+        mentorRepository.deleteById(id);
     }
 
     @Transactional

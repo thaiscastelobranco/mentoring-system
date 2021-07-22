@@ -1,9 +1,11 @@
 package com.internship.mentoringsystem.student;
 
+import com.internship.mentoringsystem.classes.Classes;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "student")
+@Table(name = "tb_student")
 public class Student {
     @Id
     @SequenceGenerator(
@@ -15,36 +17,46 @@ public class Student {
             strategy = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
-    private Long studentId;
+    @Column(name = "idt_student")
+    private Long id;
+    @Column(name = "desc_cpf")
     private String studentCpf;
+    @Column(name = "desc_name")
     private String studentName;
+    @Column(name = "desc_address")
     private String studentAddress;
+    @Column(name = "desc_email")
     private String studentEmail;
+    @ManyToOne
+    @JoinColumn(name = "idt_classes", nullable = false)
+    private Classes classes;
 
     public Student() {
     }
 
-    public Student(Long studentId, String studentCpf, String studentName, String studentAddress, String studentEmail) {
-        this.studentId = studentId;
+    public Student(Long id, String studentCpf, String studentName, String studentAddress, String studentEmail, Classes classes) {
+        this.id = id;
         this.studentCpf = studentCpf;
         this.studentName = studentName;
         this.studentAddress = studentAddress;
         this.studentEmail = studentEmail;
+        this.classes = classes;
     }
 
-    public Student(String studentCpf, String studentName, String studentAddress, String studentEmail) {
+    public Student(String studentCpf, String studentName, String studentAddress, String studentEmail, Classes classes) {
         this.studentCpf = studentCpf;
         this.studentName = studentName;
         this.studentAddress = studentAddress;
         this.studentEmail = studentEmail;
+        this.classes = classes;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Long getId() {
+        return id;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStudentCpf() {
@@ -79,14 +91,23 @@ public class Student {
         this.studentEmail = studentEmail;
     }
 
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
-                "studentId=" + studentId +
+                "id=" + id +
                 ", studentCpf=" + studentCpf +
                 ", studentName='" + studentName + '\'' +
                 ", studentAddress='" + studentAddress + '\'' +
                 ", studentEmail='" + studentEmail + '\'' +
+                ", classes='" + '\'' +
                 '}';
     }
 }

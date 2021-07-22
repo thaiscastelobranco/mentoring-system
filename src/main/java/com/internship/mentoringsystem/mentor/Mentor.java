@@ -1,10 +1,11 @@
 package com.internship.mentoringsystem.mentor;
 
+import com.internship.mentoringsystem.mentoring.Mentoring;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "mentor")
-@Embeddable
+@Table(name = "tb_mentor")
 public class Mentor {
     @Id
     @SequenceGenerator(
@@ -16,28 +17,37 @@ public class Mentor {
             strategy = GenerationType.SEQUENCE,
             generator = "mentor_sequence"
     )
+    @Column(name = "idt_mentor")
     private Long id;
+    @Column(name = "desc_cpf")
     private String mentorCpf;
+    @Column(name = "desc_name")
     private String mentorName;
+    @Column(name = "desc_address")
     private String mentorAddress;
+    @Column(name = "desc_email")
     private String mentorEmail;
+    @ManyToOne
+    private Mentoring mentoring;
 
     public Mentor() {
     }
 
-    public Mentor(Long id, String mentorCpf, String mentorName, String mentorAddress, String mentorEmail) {
+    public Mentor(Long id, String mentorCpf, String mentorName, String mentorAddress, String mentorEmail, Mentoring mentoring) {
         this.id = id;
         this.mentorCpf = mentorCpf;
         this.mentorName = mentorName;
         this.mentorAddress = mentorAddress;
         this.mentorEmail = mentorEmail;
+        this.mentoring = mentoring;
     }
 
-    public Mentor(String mentorCpf, String mentorName, String mentorAddress, String mentorEmail) {
+    public Mentor(String mentorCpf, String mentorName, String mentorAddress, String mentorEmail, Mentoring mentoring) {
         this.mentorCpf = mentorCpf;
         this.mentorName = mentorName;
         this.mentorAddress = mentorAddress;
         this.mentorEmail = mentorEmail;
+        this.mentoring = mentoring;
     }
 
     public Long getId() {
@@ -80,6 +90,14 @@ public class Mentor {
         this.mentorEmail = mentorEmail;
     }
 
+    public Mentoring getMentoring() {
+        return mentoring;
+    }
+
+    public void setMentoring(Mentoring mentoring) {
+        this.mentoring = mentoring;
+    }
+
     @Override
     public String toString() {
         return "Mentor{" +
@@ -88,6 +106,7 @@ public class Mentor {
                 ", mentorName='" + mentorName + '\'' +
                 ", mentorAddress='" + mentorAddress + '\'' +
                 ", mentorEmail='" + mentorEmail + '\'' +
+                ", mentoring='" + mentoring + '\'' +
                 '}';
     }
 }

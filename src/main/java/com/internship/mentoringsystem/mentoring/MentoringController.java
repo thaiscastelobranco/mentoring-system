@@ -25,15 +25,15 @@ public class MentoringController {
         mentoringService.addMentoring(mentoring);
     }
 
-    @DeleteMapping(path = "{mentoringId}")
-    public void deleteMentoring(@PathVariable("mentoringId") Long mentoringId) {
-        mentoringService.deleteMentoring(mentoringId);
+    @DeleteMapping(path = "{id}")
+    public void deleteMentoring(@PathVariable("id") Long id) {
+        mentoringService.deleteMentoring(id);
     }
 
-    @PutMapping(path = "{mentoringId}")
+    @PutMapping(path = "{id}")
     public void updateMentoring(
-            @PathVariable("Mentoring") Long mentoringId,
+            @PathVariable("Mentoring") Long id,
             @RequestParam(required = false) String mentoringType) {
-        mentoringService.updateMentoring(mentoringId, mentoringType);
+        mentoringService.updateMentoring(id, mentoringType);
     }
 }

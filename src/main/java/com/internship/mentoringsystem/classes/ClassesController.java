@@ -26,14 +26,14 @@ public class ClassesController {
         classesService.addNewClasses(classes);
     }
 
-    @DeleteMapping(path = "{classesId}")
-    public void deleteClasses(@PathVariable("classesId") Long classesId) {
-        classesService.deleteClasses(classesId);
+    @DeleteMapping(path = "{id}")
+    public void deleteClasses(@PathVariable("id") Long id) {
+        classesService.deleteClasses(id);
     }
 
-    @PutMapping(path = "{classesId}")
-    public void updateClasses (@PathVariable("classesId") Long classesId,
+    @PutMapping(path = "{id}")
+    public void updateClasses (@PathVariable("Classes") Long id,
                                @RequestParam(required = false) String mentoringPeriod) {
-        classesService.updateClasses(classesId, mentoringPeriod);
+        classesService.updateClasses(id, mentoringPeriod);
     }
 }

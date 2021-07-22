@@ -25,18 +25,18 @@ public class MentorController {
         mentorService.addNewMentor(mentor);
     }
 
-    @DeleteMapping(path = "{mentorId}")
-    public void deleteClasses(@PathVariable ("mentorId") Long mentorId) {
-        mentorService.deleteMentor(mentorId);
+    @DeleteMapping(path = "{id}")
+    public void deleteClasses(@PathVariable ("id") Long id) {
+        mentorService.deleteMentor(id);
     }
 
-    @PutMapping(path = "{mentorId}")
+    @PutMapping(path = "{id}")
     public void updateMentor(
-            @PathVariable("Mentor") Long mentorId,
+            @PathVariable("Mentor") Long id,
             @RequestParam(required = false) String mentorCpf,
             @RequestParam(required = false) String mentorName,
             @RequestParam(required = false) String mentorAddress,
             @RequestParam(required = false) String mentorEmail) {
-        mentorService.updateMentor(mentorId, mentorCpf, mentorName, mentorAddress, mentorEmail);
+        mentorService.updateMentor(id, mentorCpf, mentorName, mentorAddress, mentorEmail);
     }
 }

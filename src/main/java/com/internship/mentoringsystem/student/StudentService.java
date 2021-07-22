@@ -29,16 +29,16 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public void deleteStudent(Long studentId) {
-        boolean exists = studentRepository.existsById(studentId);
+    public void deleteStudent(Long id) {
+        boolean exists = studentRepository.existsById(id);
         if (!exists) {
-            throw new IllegalStateException("This student with id: " + studentId + "already exists");
+            throw new IllegalStateException("This student with id: " + id + "already exists");
         }
-        studentRepository.deleteById(studentId);
+        studentRepository.deleteById(id);
     }
 
-    public void updateStudent(Long studentId, String studentCpf, String studentName, String studentAddress, String studentEmail) {
-        Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("Mentor with id: " + studentId + "does not exist."));
+    public void updateStudent(Long id, String studentCpf, String studentName, String studentAddress, String studentEmail) {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalStateException("Mentor with id: " + id + "does not exist."));
         if (studentName != null && studentName.length() > 0 && !Objects.equals(student.getStudentName(), studentName)) {
             student.setStudentName(studentName);
         }
