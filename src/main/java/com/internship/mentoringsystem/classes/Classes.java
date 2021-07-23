@@ -34,8 +34,8 @@ public class Classes {
         this.mentoringPeriod = mentoringPeriod;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId(Long id) {
+        return this.id;
     }
 
     public void setId(Long id) {

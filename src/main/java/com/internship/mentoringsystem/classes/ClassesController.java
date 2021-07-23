@@ -32,8 +32,9 @@ public class ClassesController {
     }
 
     @PutMapping(path = "{id}")
-    public void updateClasses (@PathVariable("Classes") Long id,
-                               @RequestParam(required = false) String mentoringPeriod) {
-        classesService.updateClasses(id, mentoringPeriod);
+    public void updateClasses (@PathVariable("id") Long id,
+            @RequestBody Classes classes) {
+        classesService.updateClasses(id, classes);
     }
 }
+

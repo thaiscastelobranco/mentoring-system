@@ -43,10 +43,9 @@ public class MentoringService{
         mentoringRepository.deleteById(id);
     }
 
-    public void updateMentoring(Long id, String mentoringType) {
-        Mentoring mentoring = mentoringRepository.findById(id).orElseThrow(() -> new IllegalStateException("Mentor with id: " + id + "does not exist."));
-        if (mentoringType != null && mentoringType.length() > 0 && !Objects.equals(mentoring.getMentoringType(), mentoringType)) {
-            mentoring.setMentoringType(mentoringType);
-        }
+    public void updateMentoring(Long id, Mentoring mentoring) {
+        mentoringRepository.findById(id).orElseThrow(() -> new IllegalStateException("Mentor with id: " + id + "does not exist."));
+        mentoring.setId(id);
+        mentoringRepository.save(mentoring);
     }
 }

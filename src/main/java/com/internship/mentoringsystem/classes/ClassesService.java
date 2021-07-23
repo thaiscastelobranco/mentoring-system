@@ -39,15 +39,11 @@ public class ClassesService {
         classesRepository.deleteById(classesId);
     }
 
-    @Transactional
-    public void updateClasses(Long id, String mentoringPeriod) {
-        Classes classes = classesRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Class with id" +
-                        id + "does not exists"));
-        if(mentoringPeriod != null &&
-                mentoringPeriod.length() > 0) {
-            classes.setMentoringPeriod(mentoringPeriod);
-        }
+    //@Transactional
+    public void updateClasses(Long id, Classes classes) {
+        classesRepository.findById(id).orElseThrow(() -> new IllegalStateException("Class with id" + id + "does not exists"));
+        classes.getId(id);
         classesRepository.save(classes);
     }
 }
+

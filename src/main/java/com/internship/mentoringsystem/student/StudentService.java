@@ -37,24 +37,9 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public void updateStudent(Long id, String studentCpf, String studentName, String studentAddress, String studentEmail) {
-        Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalStateException("Mentor with id: " + id + "does not exist."));
-        if (studentName != null && studentName.length() > 0 && !Objects.equals(student.getStudentName(), studentName)) {
-            student.setStudentName(studentName);
-        }
-        if (studentCpf != null && studentCpf.length() > 0 && Objects.equals(student.getStudentCpf(), studentCpf)) {
-            student.setStudentCpf(studentCpf);
-        }
-        if (studentAddress != null && studentAddress.length() > 0 && !Objects.equals(student.getStudentAddress(), studentAddress)) {
-            student.setStudentAddress(studentAddress);
-        }
-        if (studentEmail != null && studentEmail.length() > 0
-                && Objects.equals(student.getStudentEmail(), studentEmail)) {
-            Optional<Student> studentOptional = studentRepository.findStudentByEmail(studentEmail);
-            if (studentOptional.isPresent()) {
-                throw new IllegalStateException("This student already exists.");
-            }
-            student.setStudentEmail(studentEmail);
-        }
+    public void updateStudent(Long id, Student student) {
+        studentRepository.findById(id).orElseThrow(() -> new IllegalStateException("Student with id: " + id + "does not exist."));
+        student.setId(id);
+        studentRepository.save(student);
     }
 }

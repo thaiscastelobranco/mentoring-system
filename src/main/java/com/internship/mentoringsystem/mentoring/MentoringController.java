@@ -32,8 +32,9 @@ public class MentoringController {
 
     @PutMapping(path = "{id}")
     public void updateMentoring(
-            @PathVariable("Mentoring") Long id,
-            @RequestParam(required = false) String mentoringType) {
-        mentoringService.updateMentoring(id, mentoringType);
+            @PathVariable("id") Long id,
+            @RequestBody Mentoring mentoring) {
+        mentoringService.updateMentoring(id, mentoring);
     }
 }
+

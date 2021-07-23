@@ -39,25 +39,10 @@ public class MentorService {
         mentorRepository.deleteById(id);
     }
 
-    @Transactional
-    public void updateMentor(Long id, String mentorCpf,String mentorName, String mentorAddress, String mentorEmail) {
-        Mentor mentor = mentorRepository.findById(id).orElseThrow(() -> new IllegalStateException("Mentor with id: " + id + "does not exist."));
-        if (mentorName != null && mentorName.length() > 0 && !Objects.equals(mentor.getMentorName(), mentorName)) {
-            mentor.setMentorName(mentorName);
-        }
-        if (mentorCpf != null && mentorCpf.length() > 0 && Objects.equals(mentor.getMentorCpf(), mentorCpf)) {
-            mentor.setMentorCpf(mentorCpf);
-        }
-        if (mentorAddress != null && mentorAddress.length() > 0 && !Objects.equals(mentor.getMentorAddress(), mentorAddress)) {
-            mentor.setMentorAddress(mentorAddress);
-        }
-        if (mentorEmail != null && mentorEmail.length() > 0
-                && Objects.equals(mentor.getMentorEmail(), mentorEmail)) {
-            Optional<Mentor> mentorOptional = mentorRepository.findMentorByEmail(mentorEmail);
-            if (mentorOptional.isPresent()) {
-                throw new IllegalStateException("This email is already taken.");
-            }
-            mentor.setMentorEmail(mentorEmail);
-        }
+    //@Transactional
+    public void updateMentor(Long id, Mentor mentor) {
+        mentorRepository.findById(id).orElseThrow(() -> new IllegalStateException("Mentor with id: " + id + "does not exist."));
+        mentor.setId(id);
+        mentorRepository.save(mentor);
     }
 }
